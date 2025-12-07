@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 
+// ✅ Importing images so Vite resolves correct paths on GitHub Pages
+import imgTrend from './Trend20MA200MA.png';
+import imgARIMA from './ARIMA_HoltWinter.png';
+import imgScatter from './ScatterPlot.png';
+
 interface SampleReport {
   id: number;
   title: string;
@@ -11,24 +16,24 @@ const SAMPLES: SampleReport[] = [
   {
     id: 1,
     title: "Trend Analysis (20MA & 200MA)",
-    description: "Identify Golden Crosses and Death Crosses with clear Buy/Hold/Sell signals. Includes volume analysis and stop-loss targets.",
-    // REPLACE THIS URL with your actual image path (e.g., "/images/trend-analysis.png")
-    imageUrl: "./Trend20MA200MA.png"
+    description:
+      "Identify Golden Crosses and Death Crosses with clear Buy/Hold/Sell signals. Includes volume analysis and stop-loss targets.",
+    imageUrl: imgTrend, // ← Correct import
   },
   {
     id: 2,
     title: "AI Price Prediction Models",
-    description: "5-Day Forecasts using ARIMA and Holt-Winters machine learning models to predict future price movements.",
-    // REPLACE THIS URL with your actual image path
-    imageUrl: "/ARIMA_HoltWinter.png"
+    description:
+      "5-Day Forecasts using ARIMA and Holt-Winters machine learning models to predict future price movements.",
+    imageUrl: imgARIMA, // ← Correct import
   },
   {
     id: 3,
     title: "Volatility Scatter Plot",
-    description: "Visual cluster analysis to spot 'Big Gainers' and 'Big Droppers'. Filter by volatility characteristics to find breakout stocks.",
-    // REPLACE THIS URL with your actual image path
-    imageUrl: "/ScatterPlot.png"
-  }
+    description:
+      "Visual cluster analysis to spot 'Big Gainers' and 'Big Droppers'. Filter by volatility characteristics to find breakout stocks.",
+    imageUrl: imgScatter, // ← Correct import
+  },
 ];
 
 export const SamplePreviews: React.FC = () => {
@@ -37,7 +42,7 @@ export const SamplePreviews: React.FC = () => {
   return (
     <section className="py-20 bg-brand-dark border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl font-extrabold text-white sm:text-4xl mb-4">
@@ -51,15 +56,15 @@ export const SamplePreviews: React.FC = () => {
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {SAMPLES.map((sample) => (
-            <div 
-              key={sample.id} 
+            <div
+              key={sample.id}
               className="group cursor-pointer flex flex-col h-full"
               onClick={() => setSelectedImage(sample)}
             >
               <div className="relative overflow-hidden rounded-xl border border-slate-700 aspect-video bg-slate-800">
-                <img 
-                  src={sample.imageUrl} 
-                  alt={sample.title} 
+                <img
+                  src={sample.imageUrl}
+                  alt={sample.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
@@ -71,7 +76,7 @@ export const SamplePreviews: React.FC = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="mt-4 flex-1">
                 <h3 className="text-lg font-bold text-white mb-2 group-hover:text-brand-500 transition-colors">
                   {sample.title}
@@ -87,14 +92,14 @@ export const SamplePreviews: React.FC = () => {
 
       {/* Lightbox Modal */}
       {selectedImage && (
-        <div 
+        <div
           className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/95 backdrop-blur-sm"
           onClick={() => setSelectedImage(null)}
         >
           <div className="relative max-w-7xl w-full max-h-full flex flex-col items-center">
-            
+
             {/* Close Button */}
-            <button 
+            <button
               onClick={() => setSelectedImage(null)}
               className="absolute -top-12 right-0 text-slate-400 hover:text-white transition-colors"
             >
@@ -104,13 +109,13 @@ export const SamplePreviews: React.FC = () => {
             </button>
 
             {/* Image */}
-            <img 
-              src={selectedImage.imageUrl} 
-              alt={selectedImage.title} 
+            <img
+              src={selectedImage.imageUrl}
+              alt={selectedImage.title}
               className="max-w-full max-h-[85vh] rounded shadow-2xl border border-slate-700"
-              onClick={(e) => e.stopPropagation()} 
+              onClick={(e) => e.stopPropagation()}
             />
-            
+
             {/* Caption */}
             <div className="mt-4 text-center">
               <h3 className="text-xl font-bold text-white">{selectedImage.title}</h3>
